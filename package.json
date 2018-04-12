@@ -1,0 +1,21 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "Discord Bot",
+  "main": "app.js",
+  "repository": "http://github.com/discordBot",
+  "author": "Nicolás Flores Montenegro",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app --exec babel-node"
+  },
+  "dependencies": {
+    "discord.io": "woor/discord.io#gateway_v6",
+    "superagent": "^3.8.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
