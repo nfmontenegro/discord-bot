@@ -745,14 +745,6 @@ detect-libc@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
 
-discord.io@^2.5.3:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/discord.io/-/discord.io-2.5.3.tgz#a2db9daa4057831a58ecca75efb940b7799d435f"
-  dependencies:
-    cjopus "^0.0.4"
-    tweetnacl "^0.14.0"
-    ws "^1.1.0"
-
 discord.io@woor/discord.io#gateway_v6:
   version "2.5.3"
   resolved "https://codeload.github.com/woor/discord.io/tar.gz/2d3bcc80d1a835740b2e8c8563a7db519bb28720"
@@ -1226,6 +1218,10 @@ ms@2.0.0:
 nan@^2.3.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
+
+node-fetch@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
 
 node-pre-gyp@^0.6.39:
   version "0.6.39"

@@ -1,5 +1,6 @@
 import Discord from 'discord.io'
 import { configBot } from './config'
+import { wikipedia } from './libs/wikipedia'
 
 const bot = new Discord.Client({
   token: configBot.token,
@@ -11,11 +12,16 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-  console.log(user, channelID, message)
-  if (message === 'Nicolas') {
+  //search argument in wikipedia
+  if (message.includes('!wikipedia')) {
+    const argument = message
+      .split('!wikipedia')
+      .pop()
+      .trim()
+
     bot.sendMessage({
       to: channelID,
-      message: `Your message is ${message}`
+      message: `https://es.wikipedia.org/wiki/${argument}`
     })
   }
 })
