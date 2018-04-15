@@ -1,5 +1,5 @@
 import Discord from 'discord.io'
-import { configBot } from './config'
+import { configBot } from './config/config'
 import { cleanCommand } from './utils/util'
 import { bip } from './libs/bip'
 
@@ -27,13 +27,15 @@ bot.on('message', (user, userID, channelID, message, event) => {
   if (message.includes('!bip')) {
     const code = cleanCommand('!bip', message)
 
-    bip(code).then(res => {
-      bot.sendMessage({
-        to: channelID,
-        message: !res.saldoTarjeta
-          ? 'El código de la tarjeta no existe'
-          : `El saldo 💵  de tu tarjeta es ${res.saldoTarjeta}`
+    bip(code)
+      .then(({ saldoTarjeta }) => {
+        bot.sendMessage({
+          to: channelID,
+          message: !saldoTarjeta
+            ? 'El código de la tarjeta no existe'
+            : `El saldo 💵  de tu tarjeta es ${saldoTarjeta}`
+        })
       })
-    })
+      .catch(err => err)
   }
 })

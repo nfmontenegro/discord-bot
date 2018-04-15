@@ -1,6 +1,5 @@
-export const cleanCommand = (command, message) => {
-  return message
+export const cleanCommand = (command, message) =>
+  message
     .split(command)
     .pop()
     .trim()
-}
