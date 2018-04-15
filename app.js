@@ -2,6 +2,7 @@ import Discord from 'discord.io'
 import { configBot } from './config/config'
 import { cleanCommand } from './utils/util'
 import { bip } from './libs/bip'
+import { weather } from './libs/weather'
 
 const bot = new Discord.Client({
   token: configBot.token,
@@ -37,5 +38,19 @@ bot.on('message', (user, userID, channelID, message, event) => {
         })
       })
       .catch(err => err)
+  }
+
+  //get your money account from BIP
+  if (message.includes('!clima')) {
+    const city = cleanCommand('!clima', message)
+
+    weather(city)
+      .then(({ nextWeather, location }) => {
+        bot.sendMessage({
+          to: channelID,
+          message: `El clima para ${location} \n\n ${nextWeather}`
+        })
+      })
+      .catch(err => console.log(err))
   }
 })
