@@ -12,9 +12,8 @@ export const weather = async city => {
   const { location, day } = await getCityWeather.json()
 
   const nextWeather = day.map(
-    ({ name, tempmin, tempmax, symbol_description }) => {
-      return `para el día ${name} ${symbol_description}, la mínima es ${tempmin}º y la máxima ${tempmax}º \n\n`
-    }
+    ({ name, tempmin, tempmax, symbol_description }) =>
+      `Para el día ${name} ${symbol_description}, la mínima sera ${tempmin}º y la máxima ${tempmax}º \n`
   )
   return { nextWeather, location }
 }
