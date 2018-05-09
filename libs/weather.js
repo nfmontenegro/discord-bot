@@ -15,5 +15,8 @@ export const weather = async city => {
     ({ name, tempmin, tempmax, symbol_description }) =>
       `Para el día ${name} ${symbol_description}, la mínima sera ${tempmin}º y la máxima ${tempmax}º \n`
   )
-  return { nextWeather, location }
+
+  const message = `El clima 🌤 ☁️ 🌞 para ${location} \n\n ${nextWeather}`
+
+  return message
 }

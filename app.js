@@ -30,12 +30,10 @@ bot.on('message', (user, userID, channelID, message, event) => {
     const code = cleanCommand('!bip', message)
 
     bip(code)
-      .then(({ saldoTarjeta }) => {
+      .then(message => {
         bot.sendMessage({
           to: channelID,
-          message: !saldoTarjeta
-            ? 'El código de la tarjeta no existe'
-            : `El saldo 💵  de tu tarjeta es ${saldoTarjeta}`
+          message
         })
       })
       .catch(e => e)
@@ -46,10 +44,10 @@ bot.on('message', (user, userID, channelID, message, event) => {
     const city = cleanCommand('!clima', message)
 
     weather(city)
-      .then(({ nextWeather, location }) => {
+      .then(message => {
         bot.sendMessage({
           to: channelID,
-          message: `El clima para ${location} \n\n ${nextWeather}`
+          message
         })
       })
       .catch(e => console.log(e))
@@ -59,19 +57,10 @@ bot.on('message', (user, userID, channelID, message, event) => {
     const digits = cleanCommand('!rut', message)
 
     rut(digits)
-      .then(({ servel, nombre, rut, sexo }) => {
-        sexo === 1 ? (sexo = 'Masculino') : 'Femenino'
-        const {
-          region,
-          comuna,
-          provincia,
-          circunscripcion,
-          mesa,
-          pais
-        } = servel
+      .then(message => {
         bot.sendMessage({
           to: channelID,
-          message: `Rut: ${rut} \nNombre: ${nombre.toUpperCase()} \nSexo: ${sexo} \nRegión: ${region} \nComuna: ${comuna} \nProvincia: ${provincia}  \nCircunscripción: ${circunscripcion} \nMesa: ${mesa} \nPaís: ${pais}`
+          message
         })
       })
       .catch(e => console.log(e))
