@@ -6,8 +6,9 @@ import { cleanCommand } from './utils/util'
 import { bip } from './libs/bip'
 import { weather } from './libs/weather'
 import { rut } from './libs/rut'
+import { wikipedia } from './libs/wikipedia'
 import { kiosko } from './libs/kiosko'
-import request from 'request'
+import { commands } from './utils/util'
 
 const bot = new Discord.Client({
   token: configBot.token,
@@ -20,65 +21,36 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-  //search this argument in wikipedia
-  if (message.includes('!wikipedia')) {
-    const argument = cleanCommand('!wikipedia', message)
+  let lib
+  commands.map(command => {
+    if (message.includes(command)) {
+      const argument = cleanCommand(command, message)
+      switch (command) {
+        case '!wikipedia':
+          lib = wikipedia
+          break
+        case '!bip':
+          lib = bip
+          break
+        case '!diario':
+          lib = kiosko
+          break
+        case '!clima':
+          lib = weather
+          break
+        case '!rut':
+          lib = rut
+          break
+      }
 
-    bot.sendMessage({
-      to: channelID,
-      message: `https://es.wikipedia.org/wiki/${argument}`
-    })
-  }
-
-  //get your money account from BIP
-  if (message.includes('!bip')) {
-    const code = cleanCommand('!bip', message)
-
-    bip(code)
-      .then(message => {
-        bot.sendMessage({
-          to: channelID,
-          message
+      lib(argument)
+        .then(message => {
+          bot.sendMessage({
+            to: channelID,
+            message
+          })
         })
-      })
-      .catch(e => e)
-  }
-
-  //get weather info
-  if (message.includes('!clima')) {
-    const city = cleanCommand('!clima', message)
-    weather(city)
-      .then(message => {
-        bot.sendMessage({
-          to: channelID,
-          message
-        })
-      })
-      .catch(e => console.log(e))
-  }
-
-  if (message.includes('!rut')) {
-    const digits = cleanCommand('!rut', message)
-
-    rut(digits)
-      .then(message => {
-        bot.sendMessage({
-          to: channelID,
-          message
-        })
-      })
-      .catch(e => console.log(e))
-  }
-
-  if (message.includes('!diario')) {
-    const news = cleanCommand('!diario', message)
-    kiosko(news)
-      .then(message => {
-        bot.sendMessage({
-          to: channelID,
-          message
-        })
-      })
-      .catch(e => console.log(e))
-  }
+        .catch(e => e)
+    }
+  })
 })
