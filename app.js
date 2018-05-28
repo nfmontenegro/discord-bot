@@ -1,5 +1,4 @@
 import Discord from 'discord.io'
-import fs from 'fs'
 import { toDay } from './utils/util'
 import { configBot } from './config/config'
 import { cleanCommand } from './utils/util'
@@ -53,4 +52,14 @@ bot.on('message', (user, userID, channelID, message, event) => {
         .catch(e => e)
     }
   })
+
+  if (message === '!createinvite') {
+    bot.createInvite({ channelID }, (err, { code }) => {
+      console.log()
+      bot.sendMessage({
+        to: channelID,
+        message: `https://discord.gg/${code}`
+      })
+    })
+  }
 })
