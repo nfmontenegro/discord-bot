@@ -13,4 +13,11 @@ export const toDay = () => {
     .replace(new RegExp('-', 'g'), '/')
 }
 
-export const commands = ['!wikipedia', '!bip', '!clima', '!rut', '!diario']
+export const commands = [
+  '!wikipedia',
+  '!bip',
+  '!clima',
+  '!rut',
+  '!diario',
+  '!translate'
+]

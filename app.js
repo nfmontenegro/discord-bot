@@ -7,6 +7,7 @@ import { weather } from './libs/weather'
 import { rut } from './libs/rut'
 import { wikipedia } from './libs/wikipedia'
 import { kiosko } from './libs/kiosko'
+import { translate } from './libs/translate'
 import { commands } from './utils/util'
 
 const bot = new Discord.Client({
@@ -25,6 +26,9 @@ bot.on('message', (user, userID, channelID, message, event) => {
     if (message.includes(command)) {
       const argument = cleanCommand(command, message)
       switch (command) {
+        case '!translate':
+          lib = translate
+          break
         case '!wikipedia':
           lib = wikipedia
           break
@@ -55,7 +59,6 @@ bot.on('message', (user, userID, channelID, message, event) => {
 
   if (message === '!createinvite') {
     bot.createInvite({ channelID }, (err, { code }) => {
-      console.log()
       bot.sendMessage({
         to: channelID,
         message: `https://discord.gg/${code}`
