@@ -8,9 +8,7 @@ export const cleanCommand = (command, message) =>
 
 export const toDay = () => {
   const date = new Date()
-  return moment(date)
-    .format('YYYY-MM-DD')
-    .replace(new RegExp('-', 'g'), '/')
+  return moment(date).format('YYYY/MM/DD')
 }
 
 export const commands = [
