@@ -6,10 +6,7 @@ export const cleanCommand = (command, message) =>
     .pop()
     .trim()
 
-export const toDay = () => {
-  const date = new Date()
-  return moment(date).format('YYYY/MM/DD')
-}
+export const toDay = () => moment().format('YYYY/MM/DD')
 
 export const commands = [
   '!wikipedia',
