@@ -1,5 +1,4 @@
 import Discord from 'discord.io'
-import { toDay } from './utils/util'
 import { configBot } from './config/config'
 import { cleanCommand } from './utils/util'
 import { bip } from './libs/bip'
@@ -21,6 +20,17 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
+  console.log('event:', event)
+  console.log('type:', event.d)
+
+  const { type } = event.d
+  if (type === 7) {
+    bot.sendMessage({
+      to: channelID,
+      message: `Hola 👋! ${user}, Bienvenido al servidor de Javascript en Español 🍻`
+    })
+  }
+
   let lib
   commands.map(command => {
     if (message.includes(command)) {
