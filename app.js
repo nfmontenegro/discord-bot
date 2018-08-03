@@ -16,13 +16,16 @@ const bot = new Discord.Client({
 })
 
 bot.on('ready', () => {
-  console.log('✨ Ready!')
+  console.log('Init Bot ....')
+  console.log('Ready!  ✨')
+  console.log('======================')
+  console.log('\n')
   console.log(`${bot.username.toUpperCase()} Connected! 🤖`)
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-  // console.log('type:', event.d)
   console.log('type by:', event.d.author)
+  console.log('\n')
 
   const { id } = event.d.author
 
