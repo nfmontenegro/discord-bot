@@ -14,5 +14,6 @@ export const commands = [
   '!clima',
   '!rut',
   '!diario',
-  '!translate'
+  '!translate',
+  '!gif'
 ]
