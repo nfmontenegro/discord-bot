@@ -1,8 +1,8 @@
 import { toDay } from '../utils/util'
 
-export const kiosko = async news => {
+export function kiosko(news) {
   const date = toDay()
-  let url
+  const url
   switch (news) {
     case 'lun':
       url = `http://img.kiosko.net/${date}/cl/cl_ultimas_noticias.750.jpg`

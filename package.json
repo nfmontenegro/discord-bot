@@ -12,7 +12,8 @@
   "dependencies": {
     "discord.io": "woor/discord.io#gateway_v6",
     "moment": "^2.22.1",
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.1.2",
+    "rut.js": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,18 +1,11 @@
-import fetch from 'node-fetch'
-
 import { configBot } from '../config/config'
-
-async function fetchGif(url) {
-  const data = await fetch(url)
-  return data.json()
-}
+import { methodFetch } from '../helpers/fetch'
 
 export async function giphy(querySearch) {
-  const { data } = await fetchGif(
-    `http://api.giphy.com/v1/gifs/search?api_key=${
-      configBot.giphyKey
-    }&q=${querySearch}`
-  )
+  const url = `http://api.giphy.com/v1/gifs/search?api_key=${
+    configBot.giphyKey
+  }& q=${querySearch}`
+  const { data } = await methodFetch(url)
 
   const embedUrls = data.map(list => ({ embed_url: list.embed_url }))
   const { embed_url } = embedUrls[Math.floor(Math.random() * embedUrls.length)]
