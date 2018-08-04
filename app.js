@@ -27,17 +27,17 @@ bot.on('message', (user, userID, channelID, message, event) => {
   console.log('type by:', event.d.author)
   console.log('\n')
 
+  const { type } = event.d
+  if (type === 7) {
+    bot.sendMessage({
+      to: channelID,
+      message: `Hola 👋! ${user}, Bienvenido al servidor de Javascript en Español 🍻`
+    })
+  }
+
   const { id } = event.d.author
 
   if (id === configBot.discordIdAdmin) {
-    const { type } = event.d
-    if (type === 7) {
-      bot.sendMessage({
-        to: channelID,
-        message: `Hola 👋! ${user}, Bienvenido al servidor de Javascript en Español 🍻`
-      })
-    }
-
     let lib
     commands.map(command => {
       if (message.includes(command)) {
