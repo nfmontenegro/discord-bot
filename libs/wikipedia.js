@@ -1,3 +1,3 @@
-export function wikipedia(argument) {
+export async function wikipedia(argument) {
   return `https://es.wikipedia.org/wiki/${argument}`
 }

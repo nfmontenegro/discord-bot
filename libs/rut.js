@@ -1,7 +1,7 @@
 import { validate, clean } from 'rut.js'
 import { methodFetch } from '../helpers/fetch'
 
-export const rut = async digits => {
+export async function rut(digits) {
   try {
     if (validate(digits)) {
       const cleanedRut = clean(digits)
