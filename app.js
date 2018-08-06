@@ -1,6 +1,9 @@
 import Discord from 'discord.io'
 import { configBot } from './config/config'
+
 import { cleanCommand } from './utils/util'
+import { commands } from './utils/util'
+
 import { bip } from './libs/bip'
 import { weather } from './libs/weather'
 import { rut } from './libs/rut'
@@ -8,36 +11,39 @@ import { wikipedia } from './libs/wikipedia'
 import { kiosko } from './libs/kiosko'
 import { giphy } from './libs/gif'
 import { translate } from './libs/translate'
-import { commands } from './utils/util'
+
+require('dotenv').config()
 
 const bot = new Discord.Client({
-  token: configBot.token,
+  token: process.env.TOKEN,
   autorun: true
 })
 
 bot.on('ready', () => {
   console.log('Init Bot ....')
   console.log('Ready!  ✨')
-  console.log('======================')
+  console.log('___________________')
   console.log('\n')
   console.log(`${bot.username.toUpperCase()} Connected! 🤖`)
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-  console.log('type by:', event.d.author)
-  console.log('\n')
-
   const { type } = event.d
   if (type === 7) {
     bot.sendMessage({
       to: channelID,
-      message: `Hola 👋! ${user}, Bienvenido al servidor de Javascript en Español 🍻`
+      message: `Hola 👋! ${user}, Bienvenido a la comunidad de Javascript en Español 🍻`
     })
   }
 
   const { id } = event.d.author
 
   if (id === configBot.discordIdAdmin) {
+    console.log('type by:', event.d.author)
+    console.log('\n')
+    console.log('user id:', userID)
+    console.log('\n')
+
     let lib
     commands.map(command => {
       if (message.includes(command)) {
@@ -73,16 +79,20 @@ bot.on('message', (user, userID, channelID, message, event) => {
               message
             })
           })
-          .catch(e => e)
+          .catch(error => console.log('Err:', error))
       }
     })
 
     if (message === '!createinvite') {
       bot.createInvite({ channelID }, (err, { code }) => {
-        bot.sendMessage({
-          to: channelID,
-          message: `https://discord.gg/${code}`
-        })
+        if (!err) {
+          bot.sendMessage({
+            to: channelID,
+            message: `https://discord.gg/${code}`
+          })
+        } else {
+          console.log('Hubo un error al crear la invitación')
+        }
       })
     }
   } else {

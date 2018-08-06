@@ -1,11 +1,10 @@
-import { configBot } from '../config/config'
 import { methodFetch } from '../helpers/fetch'
 
 export async function translate(text) {
   try {
     const lang = 'en'
     const yandexApi = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
-      configBot.yandexKey
+      process.env.YANDEX
     }&text=${text}&lang=${lang}`
 
     const data = await methodFetch(yandexApi)

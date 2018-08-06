@@ -1,9 +1,8 @@
-import { configBot } from '../config/config'
 import { methodFetch } from '../helpers/fetch'
 
 export async function giphy(querySearch) {
   const url = `http://api.giphy.com/v1/gifs/search?api_key=${
-    configBot.giphyKey
+    process.env.GIPHY
   }& q=${querySearch}`
   const { data } = await methodFetch(url)
 
