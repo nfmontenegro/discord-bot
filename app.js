@@ -29,14 +29,14 @@ bot.on('ready', () => {
 
 bot.on('message', (user, userID, channelID, message, event) => {
   const { type } = event.d
-  if (type === 7) {
+  const { id, bot } = event.d.author
+
+  if (type === 7 && id !== configBot.discordIdBot) {
     bot.sendMessage({
       to: channelID,
       message: `Hola 👋! ${user}, Bienvenido a la comunidad de Javascript en Español 🍻`
     })
   }
-
-  const { id } = event.d.author
 
   if (id === configBot.discordIdAdmin) {
     console.log('type by:', event.d.author)
@@ -96,8 +96,6 @@ bot.on('message', (user, userID, channelID, message, event) => {
       })
     }
   } else {
-    if (!configBot.discordIdBot === id) {
-      console.log('No tienes permiso: ', event.d.author)
-    }
+    console.log('No tienes permiso: ', event.d.author)
   }
 })
