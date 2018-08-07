@@ -10,7 +10,7 @@
     "start": "nodemon app --exec babel-node"
   },
   "dependencies": {
-    "discord.io": "woor/discord.io#gateway_v6",
+    "discord.io": "github:woor/discord.io#gateway_v6",
     "dotenv": "^6.0.0",
     "moment": "^2.22.1",
     "node-fetch": "^2.1.2",
