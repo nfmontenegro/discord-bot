@@ -11,7 +11,6 @@ import { wikipedia } from './libs/wikipedia'
 import { kiosko } from './libs/kiosko'
 import { giphy } from './libs/gif'
 import { translate } from './libs/translate'
-import { youtube } from './libs/youtube';
 
 require('dotenv').config()
 
@@ -39,7 +38,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
     })
   }
 
-  if (id === configBot.discordIdAdmin || id === configBot.discordIdBot ) {
+  if (id === configBot.discordIdAdmin) {
     console.log('type by:', event.d.author)
     console.log('\n')
     console.log('user id:', userID)
@@ -70,9 +69,6 @@ bot.on('message', (user, userID, channelID, message, event) => {
             break
           case '!rut':
             lib = rut
-            break
-          case '!youtube':
-            lib = youtube
             break
         }
 

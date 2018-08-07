@@ -15,6 +15,5 @@ export const commands = [
   '!rut',
   '!diario',
   '!translate',
-  '!gif',
-  '!youtube'
+  '!gif'
 ]
