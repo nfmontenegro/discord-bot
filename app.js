@@ -11,6 +11,7 @@ import { wikipedia } from './libs/wikipedia'
 import { kiosko } from './libs/kiosko'
 import { giphy } from './libs/gif'
 import { translate } from './libs/translate'
+import { youtube } from './libs/youtube'
 
 require('dotenv').config()
 
@@ -28,74 +29,77 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-    const { type } = event.d
-    const { id } = event.d.author
+  const { type } = event.d
+  const { id } = event.d.author
 
-    if (type === 7 && id !== configBot.discordIdBot) {
-        bot.sendMessage({
-            to: channelID,
-            message: `Hola 👋! ${user}, Bienvenido a la comunidad de Javascript en Español 🍻`
-        })
-    }
+  if (type === 7 && id !== configBot.discordIdBot) {
+    bot.sendMessage({
+      to: channelID,
+      message: `Hola 👋! ${user}, Bienvenido a la comunidad de Javascript en Español 🍻`
+    })
+  }
 
-    if (id === configBot.discordIdAdmin) {
-        console.log('type by:', event.d.author)
-        console.log('\n')
-        console.log('user id:', userID)
-        console.log('\n')
+  if (id === configBot.discordIdAdmin || id === configBot.discordIdBot) {
+    console.log('type by:', event.d.author)
+    console.log('\n')
+    console.log('user id:', userID)
+    console.log('\n')
 
-        let lib
-        commands.map(command => {
-            if (message.includes(command)) {
-                const argument = cleanCommand(command, message)
-                switch (command) {
-                    case '!translate':
-                        lib = translate
-                        break
-                    case '!wikipedia':
-                        lib = wikipedia
-                        break
-                    case '!bip':
-                        lib = bip
-                        break
-                    case '!diario':
-                        lib = kiosko
-                        break
-                    case '!clima':
-                        lib = weather
-                        break
-                    case '!gif':
-                        lib = giphy
-                        break
-                    case '!rut':
-                        lib = rut
-                        break
-                }
-
-                lib(argument)
-                    .then(message => {
-                        bot.sendMessage({
-                            to: channelID,
-                            message
-                        })
-                    })
-                    .catch(error => console.log('Err:', error))
-            }
-        })
-
-        if (message === '!createinvite') {
-            bot.createInvite({ channelID }, (err, { code }) => {
-                if (!err) {
-                    bot.sendMessage({
-                        to: channelID,
-                        message: `https://discord.gg/${code}`
-                    })
-                } else {
-                    console.log('Hubo un error al crear la invitación')
-                }
-            })
+    let lib
+    commands.map(command => {
+      if (message.includes(command)) {
+        const argument = cleanCommand(command, message)
+        switch (command) {
+          case '!translate':
+            lib = translate
+            break
+          case '!wikipedia':
+            lib = wikipedia
+            break
+          case '!bip':
+            lib = bip
+            break
+          case '!diario':
+            lib = kiosko
+            break
+          case '!clima':
+            lib = weather
+            break
+          case '!gif':
+            lib = giphy
+            break
+          case '!rut':
+            lib = rut
+            break
+          case '!youtube':
+            lib = youtube
+            break
         }
-    } else {
-        console.log('No tienes permiso: ', event.d.author)
+
+        lib(argument)
+          .then(message => {
+            bot.sendMessage({
+              to: channelID,
+              message
+            })
+          })
+          .catch(error => console.log('Err:', error))
+      }
+    })
+
+    if (message === '!createinvite') {
+      bot.createInvite({ channelID }, (err, { code }) => {
+        if (!err) {
+          bot.sendMessage({
+            to: channelID,
+            message: `https://discord.gg/${code}`
+          })
+        } else {
+          console.log('Hubo un error al crear la invitación')
+        }
+      })
     }
+  } else {
+    console.log('No tienes permiso: ', event.d.author)
+  }
 })
