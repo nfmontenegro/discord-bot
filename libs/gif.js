@@ -3,7 +3,7 @@ import { methodFetch } from '../helpers/fetch'
 export async function giphy(querySearch) {
   const url = `http://api.giphy.com/v1/gifs/search?api_key=${
     process.env.GIPHY
-  }& q=${querySearch}`
+  }&q=${querySearch}`
   const { data } = await methodFetch(url)
 
   const embedUrls = data.map(list => ({ embed_url: list.embed_url }))
