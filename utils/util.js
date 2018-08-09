@@ -1,12 +1,15 @@
 import moment from 'moment'
 
-export const cleanCommand = (command, message) =>
-  message
+export function cleanCommand(command, message) {
+  return message
     .split(command)
     .pop()
     .trim()
+}
 
-export const toDay = () => moment().format('YYYY/MM/DD')
+export function toDay() {
+  return moment().format('YYYY/MM/DD')
+}
 
 export const commands = [
   '!wikipedia',

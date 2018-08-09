@@ -1,17 +1,8 @@
 import Discord from 'discord.io'
 import { configBot } from './config/config'
 
-import { cleanCommand } from './utils/util'
-import { commands } from './utils/util'
-
-import { bip } from './libs/bip'
-import { weather } from './libs/weather'
-import { rut } from './libs/rut'
-import { wikipedia } from './libs/wikipedia'
-import { kiosko } from './libs/kiosko'
-import { giphy } from './libs/gif'
-import { translate } from './libs/translate'
-import { youtube } from './libs/youtube'
+import libs from './libs'
+import utils from './utils'
 
 require('dotenv').config()
 
@@ -44,6 +35,19 @@ bot.on('message', (user, userID, channelID, message, event) => {
     console.log('\n')
     console.log('user id:', userID)
     console.log('\n')
+
+    const {
+      bip,
+      weather,
+      rut,
+      wikipedia,
+      kiosko,
+      giphy,
+      translate,
+      youtube
+    } = libs
+
+    const { cleanCommand, commands } = utils
 
     let lib
     commands.map(command => {
