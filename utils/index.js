@@ -1,4 +1,4 @@
-import { cleanCommand, commands, toDay } from './util'
+import {cleanCommand, commands, toDay} from './util'
 
 export default {
   cleanCommand,

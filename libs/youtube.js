@@ -17,7 +17,7 @@ function requestYoutube(params) {
 
 export async function youtube(params) {
   try {
-    const { items } = await requestYoutube(params)
+    const {items} = await requestYoutube(params)
     const videosId = items.map(item => item.id.videoId).filter(data => data)
 
     const randomVideo = videosId[Math.floor(Math.random() * videosId.length)]

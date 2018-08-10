@@ -1,4 +1,4 @@
-import { toDay } from '../utils/util'
+import {toDay} from '../utils/util'
 
 export async function kiosko(news) {
   const date = toDay()

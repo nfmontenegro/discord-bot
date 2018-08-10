@@ -1,4 +1,4 @@
-import { methodFetch } from '../helpers/fetch'
+import {methodFetch} from '../helpers/fetch'
 
 export async function translate(text) {
   try {

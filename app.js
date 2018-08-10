@@ -1,5 +1,5 @@
 import Discord from 'discord.io'
-import { configBot } from './config/config'
+import {configBot} from './config/config'
 
 import libs from './libs'
 import utils from './utils'
@@ -20,8 +20,8 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-  const { type } = event.d
-  const { id } = event.d.author
+  const {type} = event.d
+  const {id} = event.d.author
 
   if (type === 7 && id !== configBot.discordIdBot) {
     bot.sendMessage({
@@ -47,7 +47,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
       youtube
     } = libs
 
-    const { cleanCommand, commands } = utils
+    const {cleanCommand, commands} = utils
 
     let lib
     commands.map(command => {
@@ -92,7 +92,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
     })
 
     if (message === '!createinvite') {
-      bot.createInvite({ channelID }, (err, { code }) => {
+      bot.createInvite({channelID}, (err, {code}) => {
         if (!err) {
           bot.sendMessage({
             to: channelID,
