@@ -104,6 +104,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
       })
     }
   } else {
-    console.log('No tienes permiso: ', event.d.author)
+    console.log('No tienes permisos: ', event.d.author)
+    console.log('Try: ', message)
   }
 })
