@@ -8,7 +8,9 @@ export function cleanCommand(command, message) {
 }
 
 export function toDay() {
-  return moment().format('YYYY/MM/DD')
+  return moment()
+    .subtract(3, 'h')
+    .format('YYYY/MM/DD')
 }
 
 export const commands = [
