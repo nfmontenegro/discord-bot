@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-export async function methodFetch(url) {
+export async function requestData(url) {
   try {
     const response = await fetch(url)
     return response.json()

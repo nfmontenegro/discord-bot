@@ -1,4 +1,4 @@
-import {methodFetch} from '../helpers/fetch'
+import {requestData} from '../helpers/fetch'
 
 export async function translate(text) {
   try {
@@ -7,7 +7,7 @@ export async function translate(text) {
       process.env.YANDEX
     }&text=${text}&lang=${lang}`
 
-    const data = await methodFetch(yandexApi)
+    const data = await requestData(yandexApi)
     return `🤖 Traducción: ${datatext[0]} `
   } catch (err) {
     console.log('Err:', err)

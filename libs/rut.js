@@ -1,12 +1,12 @@
 import {validate, clean} from 'rut.js'
-import {methodFetch} from '../helpers/fetch'
+import {requestData} from '../helpers/fetch'
 
 export async function rut(digits) {
   try {
     if (validate(digits)) {
       const cleanedRut = clean(digits)
       const url = `https://api.rutify.cl/rut/${cleanedRut}`
-      let {servel, nombre, rut, sexo} = await methodFetch(url)
+      let {servel, nombre, rut, sexo} = await requestData(url)
 
       sexo = sexo === 1 ? 'Masculino' : 'Femenino'
 
