@@ -1,8 +1,8 @@
 import Discord from 'discord.io'
-import {configBot} from './config/config'
 
 import libs from './libs'
 import utils from './utils'
+import {configBot} from './config/config'
 
 require('dotenv').config()
 
