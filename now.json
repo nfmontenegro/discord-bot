@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "name": "discord-bot",
-  "alias": "discord-bot",
+  "type": "docker",
   "dotenv": ".env",
-  "type": "docker"
+  "features": {
+    "cloud": "v2"
+  }
 }
