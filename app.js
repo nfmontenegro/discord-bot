@@ -2,7 +2,8 @@ import Discord from 'discord.io'
 
 import libs from './libs'
 import utils from './utils'
-import {configBot} from './config/config'
+
+import {discordIdBot} from './config'
 
 require('dotenv').config()
 
@@ -20,10 +21,12 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-  const {type} = event.d
-  const {id} = event.d.author
+  const {
+    type,
+    author: {id}
+  } = event.d
 
-  if (type === 7 && id !== configBot.discordIdBot) {
+  if (type === 7 && id !== discordIdBot) {
     bot.sendMessage({
       to: channelID,
       message: `Hola 👋! ${user}, Bienvenido a la comunidad de Javascript en Español 🍻`
@@ -38,7 +41,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
   commands.map(command => {
     if (message.includes(command)) {
       const argument = cleanCommand(command, message)
-      if (id === configBot.discordIdAdmin || id === configBot.discordIdBot) {
+      if (id === discordIdAdmin || id === discordIdBot) {
         console.log('=> type by:', event.d.author)
         console.log('\n')
         console.log('=> user id:', userID)
@@ -97,3 +100,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
     })
   }
 })
+
+require('http')
+  .createServer()
+  .listen(3000)
