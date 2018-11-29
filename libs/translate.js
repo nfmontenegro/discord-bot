@@ -1,4 +1,4 @@
-import {requestData} from '../helpers/fetch'
+import fetch from 'node-fetch'
 
 export async function translate(text) {
   try {
@@ -7,8 +7,9 @@ export async function translate(text) {
       process.env.YANDEX
     }&text=${text}&lang=${lang}`
 
-    const data = await requestData(yandexApi)
-    return `🤖 Traducción: ${datatext[0]} `
+    const response = await fetch(yandexApi)
+    const parseData = await response.json()
+    return `🤖 Traducción: ${parseData[0]} `
   } catch (err) {
     console.log('Err:', err)
   }

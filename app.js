@@ -3,8 +3,6 @@ import Discord from 'discord.io'
 import libs from './libs'
 import utils from './utils'
 
-import {discordIdBot} from './config'
-
 require('dotenv').config()
 
 const bot = new Discord.Client({
@@ -26,7 +24,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
     author: {id}
   } = event.d
 
-  if (type === 7 && id !== discordIdBot) {
+  if (type === 7 && id !== process.env.DISCORDIDBOT) {
     bot.sendMessage({
       to: channelID,
       message: `Hola 👋! ${user}, Bienvenido a la comunidad de Javascript en Español 🍻`
@@ -37,16 +35,19 @@ bot.on('message', (user, userID, channelID, message, event) => {
 
   const {cleanCommand, commands} = utils
 
-  let lib
   commands.map(command => {
     if (message.includes(command)) {
       const argument = cleanCommand(command, message)
-      if (id === discordIdAdmin || id === discordIdBot) {
+      if (
+        id === process.env.DISCORDIDADMIN ||
+        id === process.env.DISCORDIDBOT
+      ) {
         console.log('=> type by:', event.d.author)
         console.log('\n')
         console.log('=> user id:', userID)
         console.log('\n')
 
+        let lib
         switch (command) {
           case '!translate':
             lib = translate
@@ -97,6 +98,13 @@ bot.on('message', (user, userID, channelID, message, event) => {
           message: `https://discord.gg/${code}`
         })
       }
+    })
+  }
+
+  if (message === '!help' || message === '!ayuda') {
+    bot.sendMessage({
+      to: channelID,
+      message: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
     })
   }
 })

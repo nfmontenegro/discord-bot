@@ -1,6 +1,6 @@
 import Youtube from 'youtube-node'
 
-function requestYoutube(params) {
+function requestVideoFromYoutube(params) {
   return new Promise((resolve, reject) => {
     const youtube = new Youtube()
     youtube.setKey(process.env.YOUTUBE)
@@ -17,7 +17,7 @@ function requestYoutube(params) {
 
 export async function youtube(params) {
   try {
-    const {items} = await requestYoutube(params)
+    const {items} = await requestVideoFromYoutube(params)
     const videosId = items.map(item => item.id.videoId).filter(data => data)
 
     const randomVideo = videosId[Math.floor(Math.random() * videosId.length)]
