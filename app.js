@@ -1,6 +1,4 @@
 import Discord from 'discord.io'
-
-import libs from './libs'
 import utils from './utils'
 
 require('dotenv').config()
@@ -31,13 +29,9 @@ bot.on('message', (user, userID, channelID, message, event) => {
     })
   }
 
-  const {bip, weather, rut, wikipedia, kiosko, giphy, translate, youtube} = libs
-
-  const {cleanCommand, commands} = utils
-
-  commands.map(command => {
+  utils.commands.map(command => {
     if (message.includes(command)) {
-      const argument = cleanCommand(command, message)
+      const argument = utils.cleanCommand(command, message)
       if (
         id === process.env.DISCORDIDADMIN ||
         id === process.env.DISCORDIDBOT
@@ -47,33 +41,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
         console.log('=> user id:', userID)
         console.log('\n')
 
-        let lib
-        switch (command) {
-          case '!translate':
-            lib = translate
-            break
-          case '!wikipedia':
-            lib = wikipedia
-            break
-          case '!bip':
-            lib = bip
-            break
-          case '!diario':
-            lib = kiosko
-            break
-          case '!clima':
-            lib = weather
-            break
-          case '!gif':
-            lib = giphy
-            break
-          case '!rut':
-            lib = rut
-            break
-          case '!youtube':
-            lib = youtube
-            break
-        }
+        const lib = utils.requestLib(command)
 
         lib(argument)
           .then(message => {
