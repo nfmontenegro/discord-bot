@@ -6,7 +6,7 @@
   "author": "Nicolás Flores Montenegro",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app --exec babel-node"
+    "start": "nodemon app --exec ./node_modules/.bin/babel-node"
   },
   "dependencies": {
     "discord.io": "github:woor/discord.io#gateway_v6",
