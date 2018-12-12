@@ -1,7 +1,10 @@
+import express from 'express'
 import Discord from 'discord.io'
 import utils from './utils'
 
 require('dotenv').config()
+
+const app = express()
 
 const bot = new Discord.Client({
   token: process.env.TOKEN,
@@ -77,6 +80,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
   }
 })
 
-require('http')
-  .createServer()
-  .listen(3000)
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+  console.log('Express server listening on port', port)
+})
