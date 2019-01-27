@@ -13,7 +13,7 @@ const bot = new Discord.Client({
 bot.on('ready', () => {
   console.log('=> Init Bot ....')
   console.log('=> Ready!  ✨')
-  console.log('___________________')
+  console.log('=================================')
   console.log('\n')
   console.log(`=> ${bot.username.toUpperCase()} Connected! 🤖`)
 })
@@ -44,6 +44,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
         console.log('\n')
         console.log('=> user id:', userID)
         console.log('\n')
+        console.log('=================================')
 
         const lib = utils.requestLib(command)
 

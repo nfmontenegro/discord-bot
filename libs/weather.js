@@ -12,10 +12,10 @@ export async function weather(city) {
   const response = await fetch(urlCity)
   const {location, day} = await response.json()
 
-  const nextWeather = Object.values(day).map(
+  const commingWeather = Object.values(day).map(
     ({name, tempmin, tempmax, symbol_description}) =>
       `Para el día ${name} ${symbol_description}, la mínima sera ${tempmin}º y la máxima ${tempmax}º \n`
   )
 
-  return `El clima 🌤 ☁️ 🌞 para ${location} \n\n ${nextWeather.join('\n')}`
+  return `El clima 🌤 ☁️ 🌞 para ${location} \n\n ${commingWeather.join('\n')}`
 }
