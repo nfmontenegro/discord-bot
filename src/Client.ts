@@ -16,7 +16,20 @@ export default class Client {
   };
 
   public async login(): Promise<void> {
-    console.log('Login BOT')
-    await this.client.login(this.configuration.discordToken)
+    this.client.login(this.configuration.discordToken)
   }
+
+  public async onReady(): Promise<void> {
+    this.client.on('ready', () => {
+      console.log('Im ready!')
+    })
+  }
+
+  public async readMessage(): Promise<void> {
+    await this.client.on('message', msg => {
+      console.log('### Emit Message')
+    })
+  }
+
+
 };

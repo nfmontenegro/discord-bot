@@ -13,6 +13,9 @@ export default class Bot {
   }
 
   public async run(): Promise<void> {
-    await this.client.login();
+    await this.client.login()
+    await this.client.onReady()
+
+    await this.client.readMessage()
   }
 }
