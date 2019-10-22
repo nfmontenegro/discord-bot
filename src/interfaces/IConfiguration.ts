@@ -1,3 +1,3 @@
 export default interface IConfiguration {
-  discordToken: string
+  [key: string]: string | undefined
 }
