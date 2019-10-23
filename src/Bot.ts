@@ -1,24 +1,23 @@
 import {Client} from 'discord.js';
 
-import EventHandler from './services/EventHandler'
+import EventHandler from './services/EventHandler';
 import IConfiguration from './interfaces/IConfiguration'
 
 export default class Bot {
-  private readonly client: Client;
-  private readonly configuration: IConfiguration;
-  private readonly eventHandler: EventHandler;
+  public client: Client;
+  public eventHandler: EventHandler;
+  public configuration: IConfiguration;
 
-  public constructor(configuration: IConfiguration, eventHandler: EventHandler) {
+  constructor(configuration: IConfiguration) {
     this.configuration = configuration;
-    this.client = new Client();
-    this.eventHandler = new EventHandler();
 
-    this.client.login(this.configuration.discordToken);
+    this.client = new Client()
+    this.eventHandler = new EventHandler(this.client)
 
+    this.client.login(this.configuration.discordToken)
   }
 
-  public async run(): Promise<void> {
-    console.log('Bot running')
-    this.eventHandler.registerEvents();
+  public run(): void {
+    this.eventHandler.hello()
   }
 }

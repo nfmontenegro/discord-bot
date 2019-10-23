@@ -1,11 +1,18 @@
-import Bot from '../Bot'
+import {Client} from 'discord.js';
+export default class EventHandler {
+  public client: Client;
 
-export default class EventHandler extends Bot {
-  public registerEvents() {
-    this.client.on('ready', this.readyOn);
+  constructor(client: Client) {
+    this.client = client
   }
 
-  public readyOn() {
-    console.log('Bot ready ON');
+  public hello() {
+    this.readyOn(this.client)
+  }
+
+  public readyOn(client: Client) {
+    client.on('ready', () => {
+      console.log('Im ready beep beep!~~~~')
+    })
   }
 }
