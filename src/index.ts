@@ -6,4 +6,4 @@ const bot: Bot = new Bot({
   discordToken: process.env['DISCORD_TOKEN']
 })
 
-bot.run()
+bot.init()

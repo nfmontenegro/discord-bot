@@ -17,7 +17,7 @@ export default class Bot {
     this.client.login(this.configuration.discordToken)
   }
 
-  public run(): void {
-    this.eventHandler.hello()
+  public init(): void {
+    this.eventHandler.init()
   }
 }

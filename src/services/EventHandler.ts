@@ -1,4 +1,4 @@
-import {Client} from 'discord.js';
+import {Client, Message} from 'discord.js';
 export default class EventHandler {
   public client: Client;
 
@@ -6,13 +6,18 @@ export default class EventHandler {
     this.client = client
   }
 
-  public hello() {
-    this.readyOn(this.client)
+  public init() {
+    const client = this.client
+    client.on('ready', this.onReady)
+    client.on('message', this.readMessage)
   }
 
-  public readyOn(client: Client) {
-    client.on('ready', () => {
-      console.log('Im ready beep beep!~~~~')
-    })
+  private onReady(client: Client) {
+    console.log('Bot on ready! ~~~')
   }
+
+  private readMessage(message: Message) {
+    console.log('Client', message)
+  }
+
 }
