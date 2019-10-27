@@ -1,7 +1,7 @@
 import {Client} from 'discord.js';
 
 import EventHandler from './services/EventHandler';
-import IConfiguration from './interfaces/IConfiguration'
+import IConfiguration from './interfaces/IConfiguration';
 
 export default class Bot {
   private eventHandler: EventHandler;
