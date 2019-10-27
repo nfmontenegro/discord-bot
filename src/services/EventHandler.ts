@@ -1,8 +1,6 @@
 import {Client, Message, GuildMember} from 'discord.js';
-import logger from '../Logger'
 
-import Logger from '../Logger';
-import ILogger from '../interfaces/ILogger';
+import logger from '../Logger'
 
 export default class EventHandler {
   private client: Client;
@@ -28,7 +26,7 @@ export default class EventHandler {
   }
 
   private newUser(member: GuildMember): void {
-    logger(`New User "${member.user.username}" has joined "${member.guild.name}"`)
+    logger(`### New User "${member.user.username}" has joined "${member.guild.name}"`)
     const guild = member.guild;
   }
 
