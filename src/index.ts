@@ -1,9 +1,9 @@
-import Bot from './Bot'
+import Bot from './Bot';
 
-require('dotenv').config()
+require('dotenv').config();
 
 const bot: Bot = new Bot({
   discordToken: process.env['DISCORD_TOKEN']
-})
+});
 
-bot.init()
+bot.init();
