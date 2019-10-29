@@ -15,9 +15,11 @@ export default class ReadMessage {
     if (message.author.bot) return;
     logger('### Author: ', message.author.username);
     logger('### Message: ', message.content);
-    const command = mapCommands(message.content);
-    if(command) {
-      await message.reply(command)
+    logger('\n\n')
+
+    const commandService = mapCommands(message.content);
+    if(commandService) {
+      await this.replyMessage(commandService)
     }
     // await message.reply('Hey im reply', {
     //   embed: {
@@ -38,5 +40,9 @@ export default class ReadMessage {
     //     ],
     //   }
     // })
+  }
+
+  private async replyMessage(message: string): Promise<any> {
+    return await this.message.reply(message)
   }
 }
