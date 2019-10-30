@@ -17,32 +17,27 @@ export default class ReadMessage {
     logger('### Message: ', message.content);
     logger('\n\n')
 
-    const commandService = mapCommands(message.content);
+    //TODO fiilter by roles
+    const commandService = await  mapCommands(message.content);
     if(commandService) {
       await this.replyMessage(commandService)
     }
-    // await message.reply('Hey im reply', {
-    //   embed: {
-    //     color: 3447003,
-    //     description: "A very simple Embed!",
-    //     fields: [{
-    //       name: "Fields",
-    //       value: "They can have different fields with small headlines."
-    //     },
-    //     {
-    //       name: "Masked links",
-    //       value: "You can put [masked links](http://google.com) inside of rich embeds."
-    //     },
-    //     {
-    //       name: "Markdown",
-    //       value: "You can put all the *usual* **__Markdown__** inside of them."
-    //     }
-    //     ],
-    //   }
-    // })
   }
 
-  private async replyMessage(message: string): Promise<any> {
-    return await this.message.reply(message)
+  private async replyMessage(messageData: any[]): Promise<any> {
+    const mapData = messageData.map(elem => {
+      return {
+        name: elem.title,
+        value: elem.snippet
+      }
+    })
+
+    return await this.message.reply('hola', {
+      embed: {
+        color: 3447003,
+        description: "A very simple Embed!",
+        fields: mapData
+      }
+    })
   }
 }

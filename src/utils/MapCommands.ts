@@ -8,12 +8,10 @@ const clearCommand = (command, message) => {
 };
 
 //TODO: dictionary data
-const mapCommands = commandMessage => {
+const mapCommands = async commandMessage => {
   if (commandMessage.startsWith('!wikipedia')) {
     const wikipedia = new Wikipedia();
-    return wikipedia.run(clearCommand('!wikipedia', commandMessage));
-  } else {
-    return null;
+    return await wikipedia.run(clearCommand('!wikipedia', commandMessage));
   }
 };
 
