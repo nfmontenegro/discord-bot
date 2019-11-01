@@ -8,10 +8,21 @@ const clearCommand = (command, message) => {
 };
 
 //TODO: dictionary data
-const mapCommands = async commandMessage => {
-  if (commandMessage.startsWith('!wikipedia')) {
-    const wikipedia = new Wikipedia();
-    return await wikipedia.run(clearCommand('!wikipedia', commandMessage));
+const mapCommands = async (commandMessage: string) => {
+  if (commandMessage.startsWith('!')) {
+    if (commandMessage.includes('!wikipedia')) {
+      const wikipedia = new Wikipedia();
+      const wikipediaResponse = await wikipedia.run(clearCommand('!wikipedia', commandMessage));
+      return {
+        type: 'embed',
+        messageData: wikipediaResponse
+      };
+    } else {
+      return {
+        type: 'message',
+        messageData: "Command doesn't exist"
+      };
+    }
   }
 };
 
