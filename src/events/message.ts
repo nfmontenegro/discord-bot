@@ -1,7 +1,17 @@
-const onMessagge = client => {
-  client.on('message', message => {
-    console.log('Message from discord', message.author.username)
-  })
+import {Message} from 'discord.js'
+
+const onMessage = (message: Message) => {
+  if (message.author.bot) {
+    return null
+  }
 }
 
-export default onMessagge
+const userTyping = (channel, user) => {
+  debugger
+  if (user.bot) {
+    return null
+  }
+  console.log(`### ${user.tag} has started typing`)
+}
+
+export {onMessage, userTyping}

@@ -1,5 +1,5 @@
-import {Client, Message, ErrorEvent} from 'discord.js'
-import {connect, message} from './events'
+import {Client, ErrorEvent} from 'discord.js'
+import {connect, onMessage, guildMemberAdd, userTyping} from './events'
 
 const run = () => {
   const client: Client = new Client()
@@ -11,7 +11,10 @@ const run = () => {
     console.log('Discord client error!', error.message)
   })
 
-  message(client)
+  client.on('message', onMessage)
+  client.on('guildMemberAdd', guildMemberAdd)
+  client.on('typingStart', userTyping)
+
   connect(client, process.env.DISCORD_TOKEN)
 }
 

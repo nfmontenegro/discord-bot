@@ -1,4 +1,5 @@
 import connect from './connection'
-import message from './message'
+import {onMessage, userTyping} from './message'
+import {guildMemberAdd} from './guild'
 
-export {connect, message}
+export {connect, onMessage, guildMemberAdd, userTyping}
