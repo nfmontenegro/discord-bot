@@ -1,15 +1,16 @@
 import {Message, Channel, User, MessageAttachment} from 'discord.js'
 
-import fileConfig from '../../config.json'
+import * as fileConfig from '../../config.json'
 import {Config} from '../interfaces'
 import {splitMessage, commandHandler} from '../lib'
 
 const onMessage = async (message: Message): Promise<Message> => {
+  const userConfig: Config = fileConfig
   if (message.author.bot) {
     return null
   }
 
-  if (!message.content.startsWith('!')) {
+  if (!message.content.startsWith(userConfig.prefix)) {
     return null
   }
 
