@@ -4,6 +4,7 @@
     {
       "name": "Debug index.ts",
       "type": "node",
+      "console": "externalTerminal",
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "runtimeArgs": [
