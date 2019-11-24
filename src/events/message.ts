@@ -1,12 +1,12 @@
-import {Message} from 'discord.js'
+import {Message, Channel, User} from 'discord.js'
 
-const onMessage = (message: Message) => {
+const onMessage = (message: Message): void => {
   if (message.author.bot) {
     return null
   }
 }
 
-const userTyping = (channel, user) => {
+const userTyping = (channel: Channel, user: User): void => {
   debugger
   if (user.bot) {
     return null
