@@ -1,4 +1,5 @@
 import {CommandHandler} from '../interfaces'
+import {wikipedia} from '../api'
 
 const splitMessage = text => {
   const args = text
@@ -12,7 +13,7 @@ const splitMessage = text => {
 const commandHandler = ({command, args}: CommandHandler) => {
   switch (command) {
     case 'wikipedia':
-      return 'test'
+      return wikipedia(args)
       break
     default:
       return 'Command not found'

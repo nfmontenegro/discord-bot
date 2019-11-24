@@ -4,9 +4,7 @@ import fileConfig from '../../config.json'
 import {Config} from '../interfaces'
 import {splitMessage, commandHandler} from '../lib'
 
-const onMessage = (message: Message): Promise<Message> => {
-  const config: Config = JSON.parse(fileConfig)
-  debugger
+const onMessage = async (message: Message): Promise<Message> => {
   if (message.author.bot) {
     return null
   }
@@ -16,7 +14,7 @@ const onMessage = (message: Message): Promise<Message> => {
   }
 
   const commandWithArguments = splitMessage(message.content)
-  const handleMessage = commandHandler(commandWithArguments)
+  const handleMessage = await commandHandler(commandWithArguments)
   return message.channel.send(handleMessage)
 }
 
