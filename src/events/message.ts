@@ -1,8 +1,9 @@
 import {Message, Channel, User, MessageAttachment} from 'discord.js'
 
-import * as fileConfig from '../../config.json'
 import {Config} from '../interfaces'
 import {splitMessage, commandHandler} from '../lib'
+
+import * as fileConfig from '../../config.json'
 
 const onMessage = async (message: Message): Promise<Message> => {
   const userConfig: Config = fileConfig

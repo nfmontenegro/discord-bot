@@ -17,7 +17,6 @@ interface Fields {
 
 interface Item {
   color: string
-  title: string
   author: Author
   fields: Fields
   thumbnail: Thumbnail

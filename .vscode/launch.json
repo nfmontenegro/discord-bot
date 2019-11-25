@@ -2,9 +2,8 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug index.ts",
+      "name": "Debug",
       "type": "node",
-      "console": "externalTerminal",
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "runtimeArgs": [

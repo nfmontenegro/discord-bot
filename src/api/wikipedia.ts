@@ -4,24 +4,36 @@ import {Embed} from '../interfaces'
 
 export default async (queryParameter: string): Promise<Embed> => {
   const response = await axios(
-    `https://es.wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=${queryParameter}`
+    `https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=${queryParameter}`
   )
 
-  const querySearch = response.data.query.search
-  //TODO: fix embed title
+  const querySearch = response.data.query.pages
+
+  const mapUrls = Object.values(querySearch).map(async (queryValues: any) => {
+    const response = await axios(
+      `https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=${queryValues.pageid}&inprop=url&format=json`
+    )
+
+    const {title, fullurl} = response.data.query.pages[queryValues.pageid]
+    return {
+      title,
+      url: fullurl
+    }
+  })
+
+  const resolveUrlPromises = await Promise.all(mapUrls)
   return {
     embed: {
       color: '0x0099ff',
-      title: 'Wikipedia',
       author: {
         name: 'Wikipedia',
         icon_url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
         url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada'
       },
-      fields: querySearch.map(query => {
+      fields: resolveUrlPromises.map((data: any) => {
         return {
-          name: query.title,
-          value: query.snippet
+          name: data.title,
+          value: data.url
         }
       }),
       thumbnail: {
