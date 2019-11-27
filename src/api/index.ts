@@ -1,3 +1,4 @@
+import giphy from './giphy'
 import wikipedia from './wikipedia'
 
-export {wikipedia}
+export {wikipedia, giphy}

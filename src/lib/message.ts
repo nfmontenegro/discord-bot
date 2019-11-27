@@ -1,5 +1,5 @@
 import {CommandHandler} from '../interfaces'
-import {wikipedia} from '../api'
+import {wikipedia, giphy} from '../api'
 
 const splitMessage = text => {
   const args = text
@@ -15,6 +15,8 @@ const commandHandler = ({command, args}: CommandHandler) => {
     case 'wikipedia':
       return wikipedia(args)
       break
+    case 'gif':
+      return giphy(args)
     default:
       return 'Command not found'
   }
