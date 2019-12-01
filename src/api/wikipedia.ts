@@ -3,21 +3,23 @@ import axios from 'axios'
 import {Embed} from '../interfaces'
 
 export default async (queryParameter: string): Promise<Embed> => {
-  const response = await axios(
-    `https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=${queryParameter}`
-  )
+  const response = await axios({
+    method: 'GET',
+    url: `https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=${queryParameter}`
+  })
 
   const querySearch = response.data.query.pages
 
   const mapUrls = Object.values(querySearch).map(async (queryValues: any) => {
-    const response = await axios(
-      `https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=${queryValues.pageid}&inprop=url&format=json`
-    )
+    const response = await axios({
+      method: 'GET',
+      url: `https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=${queryValues.pageid}&inprop=url&format=json`
+    })
 
-    const {title, fullurl} = response.data.query.pages[queryValues.pageid]
+    const {title, fullurl: url} = response.data.query.pages[queryValues.pageid]
     return {
       title,
-      url: fullurl
+      url
     }
   })
 
