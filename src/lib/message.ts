@@ -11,12 +11,14 @@ const splitMessage = text => {
 }
 
 const commandHandler = ({command, args}: CommandHandler) => {
+  const joinQueryParameter = join(' ', args)
+
   switch (command) {
     case 'wikipedia':
-      return wikipedia(args)
+      return wikipedia(joinQueryParameter)
       break
     case 'gif':
-      return giphy(args)
+      return giphy(joinQueryParameter)
     default:
       return 'Command not found'
   }

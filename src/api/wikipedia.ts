@@ -4,8 +4,6 @@ import axios from 'axios'
 import {Embed} from '../interfaces'
 
 export default async (queryParameter): Promise<Embed> => {
-  let joinQueryParameter = join(' ', queryParameter)
-
   const response = await axios({
     method: 'GET',
     url: `https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=${joinQueryParameter}`
