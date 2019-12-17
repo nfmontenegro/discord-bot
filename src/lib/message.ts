@@ -1,5 +1,7 @@
-import {CommandHandler} from '../interfaces'
+import {join} from 'ramda'
+
 import {wikipedia, giphy} from '../api'
+import {CommandHandler} from '../interfaces'
 
 const splitMessage = text => {
   const args = text

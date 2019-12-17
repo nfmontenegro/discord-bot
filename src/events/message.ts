@@ -1,5 +1,5 @@
 import {Message, Channel, User, MessageAttachment} from 'discord.js'
-import {compose} from 'rambda'
+import {compose} from 'ramda'
 
 import {Config} from '../interfaces'
 import {splitMessage, commandHandler} from '../lib'
