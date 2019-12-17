@@ -1,4 +1,4 @@
-import {join, has} from 'rambda'
+import {join, has} from 'ramda'
 import axios from 'axios'
 
 import {Embed} from '../interfaces'
@@ -15,7 +15,6 @@ export default async (queryParameter): Promise<Embed> => {
       errorMessage = response.data.warnings.search[0]
     }
 
-    debugger
     return {
       embed: {
         color: '0x0099ff',
