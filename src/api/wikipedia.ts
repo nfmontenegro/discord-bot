@@ -38,7 +38,7 @@ export default async (queryParameter): Promise<Embed> => {
 
   const querySearch = response.data.query.pages
 
-  const mapUrls = Object.values(querySearch).map(async (queryValues: any) => {
+  const mapUrls = Object.values(querySearch).map(async queryValues => {
     const response = await axios({
       method: 'GET',
       url: `https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=${queryValues.pageid}&inprop=url&format=json`
@@ -51,7 +51,7 @@ export default async (queryParameter): Promise<Embed> => {
     }
   })
 
-  const resolveUrlPromises = await Promise.all(mapUrls)
+  const wikipediaUrls = await Promise.all(mapUrls)
 
   return {
     embed: {
@@ -61,7 +61,7 @@ export default async (queryParameter): Promise<Embed> => {
         icon_url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
         url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada'
       },
-      fields: resolveUrlPromises.map((data: any) => {
+      fields: wikipediaUrls.map((data: any) => {
         return {
           name: data.title,
           value: data.url
