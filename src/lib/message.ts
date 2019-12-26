@@ -12,18 +12,25 @@ const splitMessage = text => {
   return {command, args}
 }
 
+const switchCommand = (command, args) => {
+  const discordCommand = {
+    wikipedia: params => wikipedia(params),
+    gif: params => giphy(params)
+  }
+
+  const mapKeys = Object.keys(discordCommand)
+  const matchCommand = mapKeys.some(commandKey => commandKey === command)
+
+  if (matchCommand) {
+    return discordCommand[command](args)
+  } else {
+    return 'Command not found'
+  }
+}
+
 const commandHandler = ({command, args}: CommandHandler) => {
   const joinQueryParameter = join(' ', args)
-
-  switch (command) {
-    case 'wikipedia':
-      return wikipedia(joinQueryParameter)
-      break
-    case 'gif':
-      return giphy(joinQueryParameter)
-    default:
-      return 'Command not found'
-  }
+  return switchCommand(command, args)
 }
 
 export {splitMessage, commandHandler}
