@@ -21,11 +21,7 @@ const switchCommand = (command, args) => {
   const mapKeys = Object.keys(discordCommand)
   const matchCommand = mapKeys.some(commandKey => commandKey === command)
 
-  if (matchCommand) {
-    return discordCommand[command](args)
-  } else {
-    return 'Command not found'
-  }
+  return matchCommand ? discordCommand[command](args) : 'Command not found'
 }
 
 const commandHandler = ({command, args}: CommandHandler) => {
