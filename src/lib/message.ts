@@ -1,6 +1,6 @@
 import {join} from 'ramda'
 
-import {wikipedia, giphy} from '../api'
+import {wikipedia, giphy, holidays} from '../api'
 import {CommandHandler} from '../interfaces'
 
 const splitMessage = text => {
@@ -15,7 +15,8 @@ const splitMessage = text => {
 const switchCommand = (command, args) => {
   const discordCommand = {
     wikipedia: params => wikipedia(params),
-    gif: params => giphy(params)
+    gif: params => giphy(params),
+    holidays: params => holidays(params)
   }
 
   const mapKeys = Object.keys(discordCommand)
