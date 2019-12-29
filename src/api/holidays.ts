@@ -1,23 +1,6 @@
 import axios from 'axios'
 import {inspect} from 'util'
 
-// let parameters = {
-//   // Required
-//   country: 'PL',
-//   year: 2019
-//   // Optional
-//   // month:    7,
-//   // day:      4,
-//   // previous: true,
-//   // upcoming: true,
-//   // public:   true,
-//   // pretty:   true,
-// }
-
-// hApi.holidays(parameters, function(err, data) {
-//   // Insert awesome code here...
-// })
-
 const getCountryHolidays = async countryCode => {
   const toDay = new Date()
   const year = toDay.getUTCFullYear()
@@ -27,7 +10,7 @@ const getCountryHolidays = async countryCode => {
     method: 'GET'
   })
 
-  console.log('### Get holidays data', inspect(data.holidays.holidays, true, 10, true))
+  console.log('### Get holidays data', inspect(data.holidays.holidays, true, 2))
   return data.holidays
 }
 
@@ -37,9 +20,10 @@ const getCountryCode = async (country: string) => {
       url: `https://restcountries.eu/rest/v2/name/${country}`,
       method: 'GET'
     })
+
     return data[0].alpha2Code
   } catch (error) {
-    console.log('Catch Error', inspect(error.response.data, true, 7, true))
+    console.log('Catch Error', inspect(error.response.data, true, 2))
     return null
   }
 }
@@ -52,6 +36,7 @@ export default async (country: Array<string>): Promise<any> => {
   const countryCode = await getCountryCode(country[0])
   if (countryCode) {
     const {holidays} = await getCountryHolidays(countryCode)
+    //TODO: logger lib
     //TODO: global embed lib
     return JSON.stringify(holidays)
   } else {
