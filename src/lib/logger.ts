@@ -1,27 +1,9 @@
-import {Signale} from 'signale'
+import {inspect} from 'util'
 
-export const logger = () => {
-  const options = {
-    types: {
-      error: {
-        badge: '⚠️',
-        color: 'red',
-        label: 'Error'
-      },
-      success: {
-        badge: '👍🏻',
-        color: 'blue',
-        label: 'Success'
-      },
-      debug: {
-        badge: '🐛',
-        color: 'yellow',
-        label: 'Debug'
-      }
-    }
-  }
-
-  const logger = new Signale(options)
-  logger.success('Init logger')
-  return logger
+const logger = {
+  ['info']: message => console.log(`ℹ️ INFO: ${message}`),
+  ['debug']: (message, data = null) =>
+    console.log('🐛  DEBUG', message, inspect(data, true, 2, true))
 }
+
+export default logger
