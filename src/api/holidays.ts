@@ -1,6 +1,8 @@
 import axios from 'axios'
 import {inspect} from 'util'
 
+import {logger} from '../lib'
+
 const getCountryHolidays = async countryCode => {
   const toDay = new Date()
   const year = toDay.getUTCFullYear()
@@ -10,7 +12,7 @@ const getCountryHolidays = async countryCode => {
     method: 'GET'
   })
 
-  console.log('### Get holidays data', inspect(data.holidays.holidays, true, 2))
+  logger.debug('Get holidays data', data.holidays.holidays)
   return data.holidays
 }
 
@@ -23,7 +25,7 @@ const getCountryCode = async (country: string) => {
 
     return data[0].alpha2Code
   } catch (error) {
-    console.log('Catch Error', inspect(error.response.data, true, 2))
+    logger.debug('Catch error', error.response.data)
     return null
   }
 }

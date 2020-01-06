@@ -2,7 +2,7 @@ import {Message, Channel, User, MessageAttachment} from 'discord.js'
 import {compose} from 'ramda'
 
 import {Config} from '../interfaces'
-import {splitMessage, commandHandler} from '../lib'
+import {splitMessage, commandHandler, logger} from '../lib'
 
 import * as fileConfig from '../../config.json'
 import {globalState} from '../app'
@@ -26,7 +26,7 @@ const userTyping = (channel: Channel, user: User): void => {
   if (user.bot) {
     return null
   }
-  console.log(`### ${user.tag} has started typing`)
+  logger.info(`${user.tag} has started typing`)
 }
 
 export {onMessage, userTyping}
