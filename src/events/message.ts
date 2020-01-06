@@ -5,7 +5,6 @@ import {Config} from '../interfaces'
 import {splitMessage, commandHandler, logger} from '../lib'
 
 import * as fileConfig from '../../config.json'
-import {globalState} from '../app'
 
 const onMessage = async (message: Message): Promise<Message> => {
   const {content, channel, author} = message

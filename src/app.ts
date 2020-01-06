@@ -3,12 +3,6 @@ import {Client, ErrorEvent} from 'discord.js'
 import {logger} from './lib'
 import {connect, onMessage, guildMemberAdd, userTyping} from './events'
 
-export const globalState = (): any => {
-  return {
-    logger
-  }
-}
-
 const run = () => {
   const client: Client = new Client()
   client.on('ready', () => {
