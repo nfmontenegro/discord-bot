@@ -1,7 +1,8 @@
-import {join, has} from 'ramda'
 import axios from 'axios'
+import {join, has} from 'ramda'
 
 import {Embed, Wikipedia} from '../interfaces'
+import {embedMessage} from '../lib'
 
 export default async (queryParameter): Promise<Embed> => {
   const response = await axios({
@@ -15,25 +16,18 @@ export default async (queryParameter): Promise<Embed> => {
       errorMessage = response.data.warnings.search[0]
     }
 
-    return {
-      embed: {
-        color: '0x0099ff',
-        author: {
-          name: 'Wikipedia',
-          icon_url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
-          url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada'
-        },
-        fields: [{name: 'Error', value: 'Page not found'}],
-        thumbnail: {
-          url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
-        },
-        timestamp: new Date(),
-        footer: {
-          text: `Search with parameter ${queryParameter}`,
-          icon_url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
-        }
-      }
+    const embedMessageFields = {
+      authorName: 'Wikipedia',
+      authorIconUrl:
+        'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
+      authorUrl: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      fields: [{name: 'Error', value: 'Page not found'}],
+      thumbnailUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
+      footerText: `Search  with parameter ${queryParameter}`,
+      footerIconUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
     }
+
+    return embedMessage(embedMessageFields)
   }
 
   const querySearch = response.data.query.pages
@@ -52,29 +46,23 @@ export default async (queryParameter): Promise<Embed> => {
   })
 
   const wikipediaUrls = await Promise.all(mapUrls)
-
-  return {
-    embed: {
-      color: '0x0099ff',
-      author: {
-        name: 'Wikipedia',
-        icon_url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
-        url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada'
-      },
-      fields: wikipediaUrls.map((data: Wikipedia) => {
-        return {
-          name: data.title,
-          value: data.url
-        }
-      }),
-      thumbnail: {
-        url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
-      },
-      timestamp: new Date(),
-      footer: {
-        text: `Search  with parameter ${queryParameter}`,
-        icon_url: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
-      }
+  const mapWikipediaFields = wikipediaUrls.map((data: Wikipedia) => {
+    const {title, url} = data
+    return {
+      name: title,
+      value: url
     }
+  })
+
+  const embedMessageFields = {
+    authorName: 'Wikipedia',
+    authorIconUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
+    authorUrl: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+    fields: mapWikipediaFields,
+    thumbnailUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
+    footerText: `Search  with parameter ${queryParameter}`,
+    footerIconUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
   }
+
+  return embedMessage(embedMessageFields)
 }
