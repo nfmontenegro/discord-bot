@@ -1,7 +1,7 @@
 const embedMessage = ({
   authorName,
   authorIconUrl,
-  authorUrl,
+  authorUrl = '',
   fields,
   thumbnailUrl,
   footerText,

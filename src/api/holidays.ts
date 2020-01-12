@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import {logger, embedMessage} from '../lib'
 
-const upperCaseLetter = word => word[0].charAt(0).toUpperCase() + word[0].slice(1)
+const upperCaseLetter = word => word[0].charAt(0).toUpperCase() + word.slice(1)
 
 const getCountryHolidays = async countryCode => {
   const toDay = new Date()
@@ -12,8 +12,6 @@ const getCountryHolidays = async countryCode => {
     url: `https://getfestivo.com/v1/holidays?source=api-caller&country=${countryCode}&month=${month}&year=${year}&upcoming=1&api_key=${process.env.HOLIDAY_API_KEY}`,
     method: 'GET'
   })
-
-  logger.debug('Get holidays data', data.holidays.holidays)
   return data.holidays.holidays
 }
 
@@ -49,15 +47,16 @@ export default async (country: Array<string>): Promise<any> => {
 
     const upperCaseCountry = upperCaseLetter(country[0])
 
+    const urlImage =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxIqgHnHdrdr45ULtohY282GJrnUipntvaMP5WJ4Fudzqn2CAb&s'
+
     const embedMessageFields = {
-      authorName: `Upcoming Holidays in ${upperCaseCountry}`,
-      authorIconUrl:
-        'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
-      authorUrl: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      authorName: `Upcoming Holidays`,
+      authorIconUrl: urlImage,
       fields: mapHolidays,
-      thumbnailUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg',
-      footerText: `Search with parameter ${upperCaseCountry}`,
-      footerIconUrl: 'https://pbs.twimg.com/profile_images/1018552942670966784/0Zflj6Y__400x400.jpg'
+      thumbnailUrl: urlImage,
+      footerText: upperCaseCountry,
+      footerIconUrl: urlImage
     }
 
     return embedMessage(embedMessageFields)
