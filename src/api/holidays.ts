@@ -37,15 +37,14 @@ export default async (country: Array<string>): Promise<any> => {
   const countryCode = await getCountryCode(country[0])
   if (countryCode) {
     const holidays = await getCountryHolidays(countryCode)
+    const upperCaseCountry = upperCaseLetter(country[0])
 
     const mapHolidays = holidays
       .map(({date, name}) => ({
-        name: 'Holiday',
+        name: `Holidays ${upperCaseCountry}`,
         value: `Date: ${date}, ${name}`
       }))
       .slice(0, 6)
-
-    const upperCaseCountry = upperCaseLetter(country[0])
 
     const urlImage =
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxIqgHnHdrdr45ULtohY282GJrnUipntvaMP5WJ4Fudzqn2CAb&s'
